@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "dist/js",
+    "rootDir": "src",
+      "esModuleInterop": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "allowJs": true,
+      "noEmit": true,
+      "skipLibCheck": true,
+      "baseUrl": "./backend",
+    },
+    "include": [
+      "src/**/*.ts",
+      "spec/**/*.ts"
+    ],
+    "exclude": [
+      "src/public/",
+      "src/types/*.ts", "node_modules", ".vscode"
+    ]
+
+  }

@@ -1,0 +1,28 @@
+{
+    "mongoRunner": {
+        "connections": [
+            {
+                "name": "connection1",
+                "url": "mongodb://127.0.0.1:27017/ecommerce"
+            }
+        ]
+    },
+    "swaggerhub.apiKey": "00b151c9-7b75-49df-9a26-92d13983791d",
+    "swaggerhub.orgs": [
+        "justice-otuya", "justiceotuya"
+
+
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/.vscode": true,
+        ".vscode": true,
+        ".history": true
+    },
+    "explorerExclude.backup": null
+}
