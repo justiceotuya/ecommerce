@@ -5,7 +5,7 @@ import mongoose, { connect} from 'mongoose'
 //Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1:27017/ecommerce';
 
-const handleConnectionToDB:any = () => {
+const handleConnectionToDB:any = ():Promise<void>  => {
     return connect(mongoDB,
         { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => {

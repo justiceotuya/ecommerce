@@ -13,7 +13,13 @@ import {
   handleCheckValidPassword,
 } from './utility'
 
-
+/**
+ *
+ * TODO:
+ * 1. add pagination
+ * 2. add authorization
+ * 3. get user id from token
+ */
 // Handle Register User.
 export const create_user =  async function (req:Request, res:Response, next:NextFunction) {
   const {
@@ -30,7 +36,7 @@ export const create_user =  async function (req:Request, res:Response, next:Next
     res.status(403).send({ error });
   } else {
     const hashedPassword = hashSync(req.body.password, genSaltSync(10))
-    const user = new User({ ...req.body, password: hashedPassword, date_registered: Date.now() });
+    const user = new User({ ...req.body, password: hashedPassword, createdAt: Date.now() });
     try {
       const userWithEmail = await User.findOne({ email })
       const userWithPhoneNumber = await User.findOne({ phoneNumber})
@@ -112,17 +118,27 @@ export const delete_user = async (req:Request, res:Response) => {
   }
 }
 
-export const get_user =   function (req:Request, res:Response) {
-  // const productId = mongoose.Types.ObjectId(req.params.id);
-  User.findById(req.params.id, function (err, item) {
-    if(err){
-      res.status(500).send({message: "User id is invalid"})
-    }else{
-     if(item === null){
-      res.status(403).send({message: "User does not exist"})
-     }else{
-       res.status(200).send(item)
-     }
+export const get_user =  async  (req:Request, res:Response) => {
+  try {
+    const user = await  User.findById(req.params.id)
+    .select('firstName lastName email phoneNumber email createdAt');
+    if(user === null){
+      res.status(200).send({data: user, message:'user does not exist'})
+    }else {
+      res.status(200).send({data: user})
     }
-  })
+  } catch (error) {
+    res.status(500).send({message: "user's id is invalid", error: error.message})
+  }
 }
+
+// Display list of all Users Orders.
+export const get_all_users = async (req:Request, res:Response):Promise<void> => {
+  try {
+    const users = await User.find()
+    .select('firstName lastName email phoneNumber email createdAt');
+    res.status(200).send({"message": 'success', data:res.paginatedResults})
+  } catch (error) {
+    res.status(403).send({message: "Something Unexpected happened", error:error.message})
+  }
+};

@@ -14,14 +14,25 @@
       "noEmit": true,
       "skipLibCheck": true,
       "baseUrl": "./backend",
+      "typeRoots": [
+        "types/index.d.ts",
+        "node_modules/@types",
+      ]
     },
     "include": [
       "src/**/*.ts",
-      "spec/**/*.ts"
+      "spec/**/*.ts",
+      // "types/index.d.ts",
+      "src/.eslintrc.js",
     ],
+
     "exclude": [
       "src/public/",
-      "src/types/*.ts", "node_modules", ".vscode"
-    ]
+      "types/*.ts", "node_modules", ".vscode",".history"
+    ],
+    // "files": [
+    //   "types/index.d.ts",
+    // ]
+
 
   }

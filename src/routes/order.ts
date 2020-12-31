@@ -1,3 +1,4 @@
+import { paginatedResult } from './../controllers/utility';
 import { get_all_orders_by_user,
 get_single_order_by_user,
 create_order,
@@ -5,6 +6,7 @@ delete_order,
 update_order,
 } from './../controllers/orderController';
 import {Router, Request, Response} from 'express'
+import Order from '../models/orderModel';
 const router = Router();
 // import {
 //   get_all_orders_by_user,
@@ -16,7 +18,7 @@ const router = Router();
 
 /* GET users listing. */
 /* GET users listing. */
-router.get('/', get_all_orders_by_user);
+router.get('/', paginatedResult(Order), get_all_orders_by_user);
 router.get('/:id', get_single_order_by_user);
 router.post('/', create_order);
 router.delete('/:id', delete_order);
@@ -44,7 +46,7 @@ export default router;
 //   lastName,
 //   email,
 //   phoneNumber,
-//   date_registered} = req.body
+//   createdAt} = req.body
 
 //   if(!firstName || !lastName){
 //     res.status(StatusCodes.UNAUTHORIZED)

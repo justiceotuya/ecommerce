@@ -1,0 +1,5 @@
+{
+"ignorePatterns": [
+    ".eslintrc.js"
+]
+}

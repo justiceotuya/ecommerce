@@ -1,30 +1,33 @@
 //Require Mongoose
-import {Schema, model, Document} from 'mongoose';
+import {Schema, model, Document,Types} from 'mongoose';
 //Define a schema
 
 
 export interface IProductModel extends Document {
-  product_name: string,
-product_sku: string,
-product_description: string,
-price: string,
-product_picture: string,
-product_available: boolean,
-created_on: Date,
-updated: Date,
+  productName: string,
+productSku: string,
+productDescription: string,
+price: any,
+productPicture: string,
+isAvailable: boolean | string | any,
+createdAt: Date,
+updatedAt: Date,
+
+merchant:String
 }
 
 const ProductSchema = new Schema({
-  product_name: { type: String, required: true },
-  product_sku: { type: String, required: true },
-  product_description: String,
+  productName: { type: String, required: true },
+  productSku: { type: String, required: true },
+  productDescription: String,
   price: { type: String, required: true },
-  product_picture: String,
-  product_available: {
+  productPicture: String,
+  isAvailable: {
     type: Boolean, required: [true, 'product availability must be set'],
     default: true },
-  created_on: Date,
-  updated: { type: Date, default: Date.now() }
+    createdAt: Date,
+  updatedAt: { type: Date, default: Date.now() },
+  merchant: { type: Types.ObjectId, ref: 'Merchant', required: true }
 });
 
 // Virtual for product's URL

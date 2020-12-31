@@ -10,8 +10,9 @@ lastName:string,
 email:string,
 phoneNumber:string,
 password:string,
-date_registered:Date,
+createdAt:Date,
 updated:Date,
+type: string,
 }
 
 const UserSchema = new Schema({
@@ -21,8 +22,14 @@ const UserSchema = new Schema({
   email: { type: String, required: [true, 'user must have an email'], trim: true },
   phoneNumber: { type: String, required: true, trim: true },
   password: { type: String, required: [true, 'user must have a password'], trim: true },
-  date_registered: Date,
-  updated: { type: Date, default: Date.now() }
+  createdAt: Date,
+  updated: { type: Date, default: Date.now() },
+  type: {
+    type: String,
+    enum : ['BUYER','MERCHANT', 'DISPATCH_RIDER', 'ADMIN'],
+    default: 'BUYER',
+    required: [true, 'user must have a type'],
+},
 });
 
 
